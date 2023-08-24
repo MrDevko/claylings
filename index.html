@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Bridging NFTs to animated series. Building the web3 entertainment brand of tomorrow, with clay.">
+    <meta name="author" content="Claylings">
+    <link rel="shortcut icon" href="./images/favicon.png">
+    <title>Claylings</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @font-face {
+            font-family: mainFont;
+            src: url(./fonts/Signika-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: fontfu;
+            src: url(../fonts/forgotten_futurist_bd.ttf);
+        }
+
+        .swiper-pagination-bullet {
+
+            background-color: #ffffff;
+
+        }
+
+        html,
+        body {
+            font-family: mainFont;
+            background-color: black;
+            color: white;
+            position: relative;
+            height: 100%;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+
+
+        .grid {
+            display: grid;
+            grid-gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-auto-rows: 150px;
+            grid-auto-flow: row dense;
+        }
+
+
+        .item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            box-sizing: border-box;
+            background: #0c9a9a;
+            color: #fff;
+            grid-column-start: auto;
+            grid-row-start: auto;
+            color: #fff;
+            background: url("images/gallery-image-1.png");
+            background-size: cover;
+            background-position: center;
+            box-shadow: -2px 2px 10px 0px rgba(68, 68, 68, 0.4);
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+            counter-increment: item-counter;
+        }
+
+        .item:nth-of-type(2n) {
+            background-image: url("images/gallery-image-2.png");
+        }
+
+        .item:nth-of-type(3n) {
+            background-image: url("images/gallery-image-3.png");
+        }
+
+        .item:nth-of-type(4n) {
+            background-image: url("images/gallery-image-4.png");
+        }
+
+        .item:nth-of-type(5n) {
+            background-image: url("images/gallery-image-5.png");
+        }
+
+        .item:nth-of-type(6n) {
+            background-image: url("images/gallery-image-6.png");
+        }
+
+        .item:nth-of-type(7n) {
+            background-image: url("images/gallery-image-7.png");
+        }
+
+        .item:nth-of-type(8n) {
+            background-image: url("images/gallery-image-8.png");
+        }
+
+        .item:nth-of-type(9n) {
+            background-image: url("images/gallery-image-9.png");
+        }
+
+        .item:nth-of-type(10n) {
+            background-image: url("images/gallery-image-10.png");
+        }
+
+        .item:nth-of-type(11n) {
+            background-image: url("images/gallery-image-11.png");
+        }
+
+        .item:nth-of-type(12n) {
+            background-image: url("images/gallery-image-12.png");
+        }
+
+        .item:nth-of-type(13n) {
+            background-image: url("images/gallery-image-13.png");
+        }
+
+
+        .item:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .item:hover {
+            transform: scale(1.05);
+        }
+
+        .item:hover:after {
+            opacity: 0;
+        }
+
+        .item--medium {
+            grid-row-end: span 2;
+        }
+
+        .item--large {
+            grid-row-end: span 3;
+        }
+
+        .item--full {
+            grid-column-end: auto;
+        }
+
+        .roadbox {
+            background-color: rgb(0 0 0 / 0%);
+        }
+
+        @media screen and (min-width: 768px) {
+            .item--full {
+                grid-column: 1/-1;
+                grid-row-end: span 2;
+            }
+
+            .roadbox {
+                background-color: #0F0F0F;
+            }
+        }
+
+        img,
+        a {
+            user-drag: none;
+            -webkit-user-drag: none;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .item__details {
+            position: relative;
+            z-index: 1;
+            padding: 15px;
+            color: #444;
+            background: #fff;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            color: #828282;
+        }
+
+        .item__details:before {
+            content: counter(item-counter);
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding-right: 0.5em;
+            color: #444;
+        }
+    </style>
+    <link rel="stylesheet" href="./css/flipdown.min.css" />
+    <!-- Google Tag Manager -->
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WQ64P7J');
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQ64P7J"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div
+        style="background:linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 34%, rgba(0,212,255,0) 100%),url('./images/fade_to_transparent.png');background-repeat: no-repeat;">
+        <nav class="navbar navbar-expand-md navbar-dark sticky-top p-0" style="background-color: rgb(0 0 0 / 38%);">
+            <div class="container p-1">
+                <a class="navbar-brand" href="../"><img style="height: 30px;" src="../images/logo2.png"></a>
+                <a class="navbar-brand" href="../clayliens/"><img style="height: 30px;"
+                        src="../images/claylings_logo.png"></a>
+
+                <button class="navbar-toggler collapsed" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navc-3" aria-controls="navc-3" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="#F0F0F0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-menu">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="navbar-collapse collapse" id="navc-3">
+
+                    <div class="navbar-nav ms-auto">
+                        <div class="row">
+                            <div class="d-flex">
+                                <a class="text-reset m-auto me-md-1 m-auto" href="https://discord.gg/claylings">
+                                    <img style="width: 40px;" src="./images/DiscordIcon.png">
+                                </a>
+                                <a class="text-reset m-auto me-md-1 m-auto"
+                                    href="https://opensea.io/collection/theclaylings/">
+                                    <img style="width: 40px;" src="./images/OpenSeaIcon.png">
+                                </a>
+                                <a class="text-reset m-auto me-md-1 m-auto" href="https://twitter.com/ClaylingsNFT">
+                                    <img style="width: 40px;" src="./images/TwitterIcon.png">
+                                </a>
+                                <a class="text-reset m-auto me-md-1 m-auto"
+                                    href="https://www.instagram.com/ClaylingsNFT">
+                                    <img style="width: 40px;" src="./images/InstagramIcon.png">
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid pt-5 m-0 pb-5 m-md-auto">
+            <div class="row justify-content-around my-5" style="min-height: 60vh;">
+                <div class="col-12 col-md-9 text-center my-auto" id="vimeoContainer">
+
+                    <div class="embed-responsive embed-responsive-16by9"><iframe
+                            src="https://player.vimeo.com/video/724182180?h=58ccf31b25&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+                            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+                </div>
+            </div>
+            <div class="row justify-content-around">
+                <div class="col-8">
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid pt-5 m-0 pb-5 p-0 m-md-auto">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" id="poster1"><img src="images/animated_series_small.jpg"></div>
+                    <div class="swiper-slide" id="poster2"><img src="images/advent_calendar.jpg"></div>
+                    <div class="swiper-slide" id="poster3"><img src="images/poster_golflings_small.jpg"></div>
+                    <div class="swiper-slide" id="poster4"><img src="images/halloween_special_small.jpg"></div>
+                    <div class="swiper-slide" id="poster5"><img src="images/claylings_poster3_small.jpg"></div>
+
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div id="videos" class="my-5">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-12 col-md-9">
+                        <div class="ratio ratio-16x9">
+                            <iframe class="col-12" id="youtube-iframe"
+                                src="https://www.youtube.com/embed/RDPGtbPiovU?autoplay=1" allowfullscreen></iframe>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-12 col-md-10">
+                        <img class="w-100" src="./images/clayling_cheering_2.png">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container text-center">
+            <div class="row justify-content-around mb-5">
+                <div class="col-8 col-sm-5 col-md-4">
+                    <a href="./"><img class="w-100 mb-3 mb-md-0" src="images/logo2.png"></a>
+                </div>
+                <div class="col-8 col-sm-5 col-md-4">
+                    <a href="./clayliens/"><img class="w-100" src="images/claylings_logo.png"></a>
+                </div>
+            </div>
+
+
+            <h3 class="m-5">Bridging NFTs to animated series.<br> Building the web3 entertainment brand of tomorrow,
+                with clay.</h3>
+        </div>
+        <br><br>
+
+        <div class="container my-5">
+            <h2 class="text-start">Gallery</h2>
+            <div class="grid my-5">
+                <a href="./images/high/gallery-image-1.png" target="_blank" class="item item--medium">
+                </a>
+                <a href="./images/high/gallery-image-2.png" target="_blank" class="item item--large">
+                </a>
+                <a href="./images/high/gallery-image-3.png" target="_blank" class="item">
+                </a>
+                <a href="./images/high/gallery-image-4.png" target="_blank" class="item">
+                </a>
+                <a href="./images/high/gallery-image-5.png" target="_blank" class="item">
+                </a>
+                <a href="./images/high/gallery-image-6.png" target="_blank" class="item item--medium">
+                </a>
+                <a href="./images/high/gallery-image-7.png" target="_blank" class="item item--medium">
+                </a>
+                <a href="./images/high/gallery-image-8.png" target="_blank" class="item item--medium">
+                </a>
+                <a href="./images/high/gallery-image-9.png" target="_blank" class="item item--medium">
+                </a>
+                <a href="./images/high/gallery-image-10.png" target="_blank" class="item item--medium">
+                </a>
+                <a href="./images/high/gallery-image-11.png" target="_blank" class="item item--medium">
+                </a>
+                <a href="./images/high/gallery-image-12.png" target="_blank" class="item item--medium">
+                </a>
+                <a href="./images/high/gallery-image-13.png" target="_blank" class="item item--medium">
+                </a>
+
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="container">
+            <h2 id="faq" class="text-left pt-5 pb-2 ms-2" style="font-size: 30px;letter-spacing: 6px;font-weight: 400;">
+                FAQ</h2>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item collapsed mb-2 "
+                    style="background-color: #0F0f0f; border-radius: 10px;color:#878787;">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
+                            data-mdb-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                            style="background-color: #0F0f0f; border-radius: 10px;color:#f0f0f0 ;">
+                            Where can I purchase a Clayling?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
+                        <div class="accordion-body">
+                            <p style="text-align: left;">The mint being sold out, the only way to acquire a Clayling is
+                                on the secondary market on Opensea or Coinbase (make sure you are buying from the
+                                verified collection).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item collapsed mb-2"
+                    style="background-color: #0F0f0f; border-radius: 10px;color:#878787;">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
+                            data-mdb-target="#c2" aria-expanded="true"
+                            style="background-color: #0F0f0f; border-radius: 10px;color:#f0f0f0 ;">
+                            How can I get whitelisted for the Clayliens?
+                        </button>
+                    </h2>
+                    <div id="c2" class="accordion-collapse collapse" aria-labelledby="headingOne">
+                        <div class="accordion-body">
+                            <p style="text-align: left;">8080 Clayliens are reserved for Claylings holders (2 mints per
+                                Claylings held). The remaining WL spots will be given away to other projects'
+                                communities.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item collapsed mb-2"
+                    style="background-color: #0F0f0f; border-radius: 10px;color:#878787;">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
+                            data-mdb-target="#c3" aria-expanded="true"
+                            style="background-color: #0F0f0f; border-radius: 10px;color:#f0f0f0 ;">
+                            When will the Clayliens drop?
+                        </button>
+                    </h2>
+                    <div id="c3" class="accordion-collapse collapse" aria-labelledby="headingOne">
+                        <div class="accordion-body">
+                            <p style="text-align: left;">The Clayliens will be minting around the release of the
+                                animated series pilot, during Summer 2022.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item collapsed mb-2"
+                    style="background-color: #0F0f0f; border-radius: 10px;color:#878787;">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
+                            data-mdb-target="#c5" aria-expanded="true"
+                            style="background-color: #0F0f0f; border-radius: 10px;color:#f0f0f0 ;">
+                            How much will the Clayliens cost?
+                        </button>
+                    </h2>
+                    <div id="c5" class="accordion-collapse collapse" aria-labelledby="headingOne">
+                        <div class="accordion-body">
+                            <p style="text-align: left;">The Clayliens will be free to mint (+gas).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item collapsed mb-2"
+                    style="background-color: #0F0f0f; border-radius: 10px;color:#878787;">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
+                            data-mdb-target="#c4" aria-expanded="true"
+                            style="background-color: #0F0f0f; border-radius: 10px;color:#f0f0f0 ;">
+                            How do I contact the team?
+                        </button>
+                    </h2>
+                    <div id="c4" class="accordion-collapse collapse" aria-labelledby="headingOne">
+                        <div class="accordion-body">
+                            <p style="text-align: left;">Please reach out to us on Discord!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            draggable: true,
+            slidesPerView: 7,
+            initialSlide: 2,
+            breakpoints: {
+                // when window width is >= 320px
+                320: {
+                    initialSlide: 0,
+                    slidesPerView: 1.5,
+                    spaceBetween: 20
+                },
+                // when window width is >= 480px
+                480: {
+                    initialSlide: 0,
+                    slidesPerView: 2,
+                    spaceBetween: 30
+                },
+                // when window width is >= 640px
+                640: {
+                    initialSlide: 0,
+                    slidesPerView: 5,
+                    spaceBetween: 40
+                },
+                1200: {
+                    slidesPerView: 7,
+                    spaceBetween: 40
+                }
+            },
+            centeredSlides: true,
+            spaceBetween: 30,
+            grabCursor: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+
+
+        $('#poster1').click(swiper, function () {
+
+            swiper.slideTo(0);
+        })
+        $('#poster2').click(swiper, function () {
+            swiper.slideTo(1);
+        })
+        $('#poster3').click(swiper, function () {
+            swiper.slideTo(2);
+        })
+
+        $('#poster4').click(swiper, function () {
+            swiper.slideTo(3);
+        })
+
+        $('#poster5').click(swiper, function () {
+            swiper.slideTo(4);
+        })
+
+        swiper.on('slideChange', function (index) {
+            switch (index.realIndex) {
+                case 0:
+                    document.getElementById("youtube-iframe").src =
+                        "https://www.youtube.com/embed/RDPGtbPiovU?autoplay=1"
+                    break;
+                case 1:
+                    document.getElementById("youtube-iframe").src =
+                        "https://www.youtube.com/embed/nhpgTZn7Dx4?autoplay=1"
+                    break;
+                case 2:
+                    document.getElementById("youtube-iframe").src =
+                        "https://www.youtube.com/embed/CNn7wvrMc2g?autoplay=1"
+                    break;
+                case 3:
+                    document.getElementById("youtube-iframe").src =
+                        "https://www.youtube.com/embed/jCXT4jb_4zQ?autoplay=1"
+                    break;
+                case 4:
+                    document.getElementById("youtube-iframe").src =
+                        "https://www.youtube.com/embed/uv5q6DDTjP4?autoplay=1"
+                    break;
+                default:
+                    break;
+            }
+
+        });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
+        integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
+    <script src="./js/web3modal.js"></script>
+    <script src="./js/flipdown.min.js"></script>
+
+</body>
+
+</html>
